@@ -4,13 +4,18 @@ FROM debian:bullseye
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND noninteractive
 
-# Update package lists and install necessary tools
+# Update package lists, upgrade the system, and install necessary tools
 RUN apt-get update \
-    && apt-get install -y \
+    && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends \
         kali-linux-core \
+    && apt-get install -y --no-install-recommends \
         kali-linux-default \
+    && apt-get install -y --no-install-recommends \
         kali-linux-large \
+    && apt-get install -y --no-install-recommends \
         kali-linux-everything \
+    && apt-get install -y --no-install-recommends \
         xrdp \
         sudo \
         supervisor \
