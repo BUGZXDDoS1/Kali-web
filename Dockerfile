@@ -4,24 +4,21 @@ FROM debian:bullseye
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND noninteractive
 
-# Update package lists and install necessary tools
-RUN apt-get update && apt-get upgrade -y \
+# Update package lists, upgrade the system, and install necessary tools
+RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
         kali-linux-core \
-    && apt-get install -y --no-install-recommends \
         kali-linux-default \
-    && apt-get install -y --no-install-recommends \
         kali-linux-large \
-    && apt-get install -y --no-install-recommends \
         kali-linux-everything \
-    && apt-get install -y --no-install-recommends \
         xrdp \
         sudo \
         supervisor \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Set up Xfce desktop environment
+# Set up Xfce desktop environment (example, adjust as per your application)
 ENV DISPLAY=:1
 RUN mkdir -p /etc/supervisor/conf.d \
     && echo "[supervisord]\nnodaemon=true\n" > /etc/supervisor/supervisord.conf \
