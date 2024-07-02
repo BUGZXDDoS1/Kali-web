@@ -4,9 +4,8 @@ FROM debian:bullseye
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND noninteractive
 
-# Update package lists, upgrade the system, and install necessary tools
-RUN apt-get update \
-    && apt-get upgrade -y \
+# Update package lists and install necessary tools
+RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
         kali-linux-core \
     && apt-get install -y --no-install-recommends \
