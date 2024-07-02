@@ -1,24 +1,23 @@
-# Use a base image of Debian, which Kali Linux is based on
-FROM debian:bullseye
+# Use Kali Linux as the base image
+FROM kalilinux/kali-rolling
 
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND noninteractive
 
-# Update package lists, upgrade the system, and install necessary tools
+# Update package lists and install necessary tools
 RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y --no-install-recommends \
+    && apt-get install -y \
         kali-linux-core \
         kali-linux-default \
         kali-linux-large \
-        kali-linux-everything \
+        kali-tools-top10 \
         xrdp \
         sudo \
         supervisor \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Set up Xfce desktop environment (example, adjust as per your application)
+# Set up Xfce desktop environment and xrdp for remote desktop access
 ENV DISPLAY=:1
 RUN mkdir -p /etc/supervisor/conf.d \
     && echo "[supervisord]\nnodaemon=true\n" > /etc/supervisor/supervisord.conf \
